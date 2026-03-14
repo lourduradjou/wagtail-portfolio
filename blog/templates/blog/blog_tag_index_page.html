@@ -3,19 +3,60 @@
 
 {% block content %}
 
-    {% if request.GET.tag %}
-        <h4>Showing pages tagged "{{ request.GET.tag }}"</h4>
+<section class="tag-results">
+
+    <header class="tag-results-header">
+
+        {% if request.GET.tag %}
+            <h1 class="tag-results-title">
+                Posts tagged: <span class="tag-name">{{ request.GET.tag }}</span>
+            </h1>
+        {% else %}
+            <h1 class="tag-results-title">
+                Tagged posts
+            </h1>
+        {% endif %}
+
+    </header>
+
+    {% if blogpages %}
+
+        <ul class="tag-post-list">
+
+            {% for blogpage in blogpages %}
+
+            <li class="tag-post-item">
+
+                <article class="tag-post">
+
+                    <h2 class="tag-post-title">
+                        <a href="{% pageurl blogpage %}">
+                            {{ blogpage.title }}
+                        </a>
+                    </h2>
+
+                    <p class="tag-post-meta">
+                        <time datetime="{{ blogpage.latest_revision_created_at|date:'Y-m-d' }}">
+                            Updated {{ blogpage.latest_revision_created_at|date:"F j, Y" }}
+                        </time>
+                    </p>
+
+                </article>
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% else %}
+
+        <p class="tag-empty">
+            No posts found for this tag.
+        </p>
+
     {% endif %}
 
-    {% for blogpage in blogpages %}
-
-          <p>
-              <strong><a href="{% pageurl blogpage %}">{{ blogpage.title }}</a></strong><br />
-              <small>Revised: {{ blogpage.latest_revision_created_at }}</small><br />
-          </p>
-
-    {% empty %}
-        No pages found with that tag.
-    {% endfor %}
+</section>
 
 {% endblock %}

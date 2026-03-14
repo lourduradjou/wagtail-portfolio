@@ -5,7 +5,17 @@
 {% block body_class %}template-portfolio{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
 
-    {{ page.body }}
+<section class="portfolio-page">
+
+    <header class="portfolio-header">
+        <h1 class="portfolio-title">{{ page.title }}</h1>
+    </header>
+
+    <div class="portfolio-content">
+        {{ page.body }}
+    </div>
+
+</section>
+
 {% endblock %}

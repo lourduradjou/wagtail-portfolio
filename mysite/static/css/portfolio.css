@@ -1,0 +1,65 @@
+.portfolio-page {
+    max-width: 1100px;
+    margin: auto;
+    padding: 2rem 1rem;
+}
+
+.portfolio-title {
+    margin-bottom: 2rem;
+}
+
+/* Portfolio cards */
+
+.portfolio-card {
+    border: 1px solid #444;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.portfolio-card-image img {
+    width: 100%;
+    display: block;
+}
+
+.portfolio-card-content {
+    padding: 1rem;
+}
+
+.portfolio-card-title {
+    margin-bottom: 0.5rem;
+}
+
+/* Featured posts */
+
+.featured-posts {
+    margin-top: 3rem;
+}
+
+.featured-posts-header {
+    margin-bottom: 1.5rem;
+}
+
+.featured-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.featured-post-card {
+    border: 1px solid #444;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.featured-post-title a {
+    text-decoration: none;
+}
+
+.featured-post-title a:hover {
+    text-decoration: underline;
+}
+
+.featured-post-date {
+    font-size: 0.9rem;
+    color: #aaa;
+}

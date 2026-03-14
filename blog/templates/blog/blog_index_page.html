@@ -5,22 +5,61 @@
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
 
-    <div class="intro">{{ page.intro|richtext }}</div>
+<section class="blog-index">
 
-    {% for post in blogpages %}
-        {% with post=post.specific %}
-            <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+    <header class="blog-index-header">
+        <h1 class="blog-index-title">{{ page.title }}</h1>
 
-             <!-- Add this: -->
-        {% with post.main_image as main_image %}
-            {% if main_image %}{% image main_image fill-160x100 %}{% endif %}
-        {% endwith %}
+        {% if page.intro %}
+        <div class="blog-index-intro">
+            {{ page.intro|richtext }}
+        </div>
+        {% endif %}
+    </header>
 
-            <p>{{ post.intro }}</p>
-            {{ post.body|richtext }}
-        {% endwith %}
-    {% endfor %}
+    <div class="blog-post-list">
+
+        {% for post in blogpages %}
+            {% with post=post.specific %}
+
+            <article class="blog-card">
+
+                <a href="{% pageurl post %}" class="blog-card-link">
+
+                    {% with post.main_image as main_image %}
+                        {% if main_image %}
+                        <div class="blog-card-image">
+                            {% image main_image fill-400x250 alt=post.title %}
+                        </div>
+                        {% endif %}
+                    {% endwith %}
+
+                    <div class="blog-card-content">
+
+                        <h2 class="blog-card-title">
+                            {{ post.title }}
+                        </h2>
+
+                        {% if post.intro %}
+                        <p class="blog-card-intro">
+                            {{ post.intro }}
+                        </p>
+                        {% endif %}
+
+                    </div>
+
+                </a>
+
+            </article>
+
+            {% endwith %}
+        {% empty %}
+            <p>No blog posts found.</p>
+        {% endfor %}
+
+    </div>
+
+</section>
 
 {% endblock %}

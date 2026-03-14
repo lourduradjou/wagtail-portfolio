@@ -1,16 +1,45 @@
-{% load wagtailcore_tags %}
-<div>
-    <h2>{{ self.heading }}</h2>
-    {% if self.text %}
-        <p>{{ self.text|richtext }}</p>
-    {% endif %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-    <div class="grid">
+<section class="featured-posts">
+
+    <header class="featured-posts-header">
+
+        <h2 class="featured-posts-title">
+            {{ self.heading }}
+        </h2>
+
+        {% if self.text %}
+        <div class="featured-posts-intro">
+            {{ self.text|richtext }}
+        </div>
+        {% endif %}
+
+    </header>
+
+    <div class="featured-posts-grid">
+
         {% for page in self.posts %}
-            <div class="card">
-                <p><a href="{% pageurl page %}">{{ page.title }}</a></p>
-                <p>{{ page.specific.date }}</p>
-            </div>
+
+        <article class="featured-post-card">
+
+            <h3 class="featured-post-title">
+                <a href="{% pageurl page %}">
+                    {{ page.title }}
+                </a>
+            </h3>
+
+            {% if page.specific.date %}
+            <p class="featured-post-date">
+                <time datetime="{{ page.specific.date|date:'Y-m-d' }}">
+                    {{ page.specific.date|date:"F j, Y" }}
+                </time>
+            </p>
+            {% endif %}
+
+        </article>
+
         {% endfor %}
+
     </div>
-</div>
+
+</section>

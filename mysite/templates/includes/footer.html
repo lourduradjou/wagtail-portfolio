@@ -1,26 +1,62 @@
-{# Load navigation_tags at the top of the file: #}
 {% load navigation_tags %}
 
-<footer>
-    <p>Built with Wagtail</p>
+<footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
 
-    {% with linkedin_url=settings.base.NavigationSettings.linkedin_url github_url=settings.base.NavigationSettings.github_url mastodon_url=settings.base.NavigationSettings.mastodon_url %}
-        {% if linkedin_url or github_url or mastodon_url %}
-            <p>
-                Follow me on:
-                {% if github_url %}
-                    <a href="{{ github_url }}">GitHub</a>
-                {% endif %}
-                {% if linkedin_url %}
-                    <a href="{{ linkedin_url }}">LinkedIn</a>
-                {% endif %}
-                {% if mastodon_url %}
-                    <a href="{{ mastodon_url }}">Mastodon</a>
-                {% endif %}
-            </p>
-        {% endif %}
-    {% endwith %}
+        <p class="footer-credit">Built with Wagtail 💖</p>
 
-    {# Add footer_text: #}
-    {% get_footer_text %}
+        {% with linkedin_url=settings.base.NavigationSettings.linkedin_url github_url=settings.base.NavigationSettings.github_url mastodon_url=settings.base.NavigationSettings.mastodon_url %}
+            {% if linkedin_url or github_url or mastodon_url %}
+                <nav class="footer-social" aria-label="Social media links">
+                    <ul class="social-list">
+
+                        {% if github_url %}
+                        <li>
+                            <a class="social-link github"
+                               href="{{ github_url }}"
+                               aria-label="Visit my GitHub profile"
+                               target="_blank"
+                               rel="noopener">
+                                <span class="icon">{% include "icons/github.svg" %}</span>
+                                <span class="sr-only">GitHub</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% if linkedin_url %}
+                        <li>
+                            <a class="social-link linkedin"
+                               href="{{ linkedin_url }}"
+                               aria-label="Visit my LinkedIn profile"
+                               target="_blank"
+                               rel="noopener">
+                                <span class="icon">{% include "icons/linkedin.svg" %}</span>
+                                <span class="sr-only">LinkedIn</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% if mastodon_url %}
+                        <li>
+                            <a class="social-link mastodon"
+                               href="{{ mastodon_url }}"
+                               aria-label="Visit my Mastodon profile"
+                               target="_blank"
+                               rel="noopener">
+                                <span class="icon">{% include "icons/mastodon.svg" %}</span>
+                                <span class="sr-only">Mastodon</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </nav>
+            {% endif %}
+        {% endwith %}
+
+        <div class="footer-text">
+            {% get_footer_text %}
+        </div>
+
+    </div>
 </footer>
