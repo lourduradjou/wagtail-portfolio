@@ -41,10 +41,15 @@
    <div class="lang-switcher">
         {% get_available_languages as languages %}
         {% for lang_code, lang_name in languages %}
-            <a href="/{{ lang_code }}/"
-            {% if lang_code == LANGUAGE_CODE %}class="active"{% endif %}>
-                {{ lang_code|upper }}
-            </a>
+            {% if lang_code == 'en' %}
+                <a href="/" {% if lang_code == LANGUAGE_CODE %}class="active"{% endif %}>
+                    {{ lang_code|upper }}
+                </a>
+            {% else %}
+                <a href="/{{ lang_code }}/" {% if lang_code == LANGUAGE_CODE %}class="active"{% endif %}>
+                    {{ lang_code|upper }}
+                </a>
+            {% endif %}
             {% if not forloop.last %} | {% endif %}
         {% endfor %}
     </div>
