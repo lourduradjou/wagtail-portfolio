@@ -1,7 +1,7 @@
 from django import template
-
 from base.models import FooterText
 from wagtail.models import Site
+from django.utils.translation import get_language
 
 register = template.Library()
 
@@ -20,4 +20,20 @@ def get_footer_text(context):
 
 @register.simple_tag(takes_context=True)
 def get_site_root(context):
-    return Site.find_for_request(context["request"]).root_page
+    root = Site.find_for_request(context["request"]).root_page
+    
+    # Get current language
+    language = get_language()  # e.g. 'de', 'en', 'ta'
+    
+    if language and language != 'en':
+        try:
+            # Try to get the translated version of root page
+            translated = root.get_translations().filter(
+                locale__language_code=language
+            ).first()
+            if translated:
+                return translated
+        except Exception:
+            pass
+    
+    return root
