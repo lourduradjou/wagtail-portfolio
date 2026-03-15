@@ -1,0 +1,158 @@
+/* ============================================
+   NAVBAR STYLES
+   Save as: static/css/navbar.css
+   Then add in base.html:
+   <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+   ============================================ */
+
+/* ---------- Layout ---------- */
+header {
+    border-bottom: 2px dotted var(--border-color);
+    padding: 0.75rem 0;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* ---------- Left: Icons (social links) ---------- */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+}
+
+.nav-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    color: var(--text-color);
+    opacity: 0.7;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+    text-decoration: none;
+}
+
+.nav-icons a:hover {
+    opacity: 1;
+    background-color: var(--secondary-bg);
+}
+
+.nav-icons a svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+/* ---------- Center/Right: Nav links ---------- */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: var(--text-color);
+    opacity: 0.75;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+    background-color: var(--secondary-bg);
+}
+
+/* ---------- Hamburger button (mobile only) ---------- */
+.nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.3rem;
+    color: var(--text-color);
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.nav-hamburger:hover {
+    background-color: var(--secondary-bg);
+}
+
+.nav-hamburger svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    display: block;
+}
+
+/* Hide close icon by default, show menu icon */
+.nav-hamburger .icon-close { display: none; }
+.nav-hamburger .icon-menu  { display: block; }
+
+/* When menu is open, swap icons */
+.nav-hamburger.is-open .icon-close { display: block; }
+.nav-hamburger.is-open .icon-menu  { display: none; }
+
+/* ---------- Mobile (max 600px) ---------- */
+@media (max-width: 600px) {
+    .nav-hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        width: 100%;
+        padding: 0.5rem 0 0.25rem;
+        border-top: 1px solid var(--border-color);
+        margin-top: 0.5rem;
+    }
+
+    .nav-links.is-open {
+        display: flex;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 0.55rem 0.4rem;
+        font-size: 1rem;
+        border-radius: 4px;
+    }
+
+    /* Stacking order on mobile */
+    header nav {
+        flex-wrap: wrap;
+    }
+
+    .nav-icons     { order: 1; }
+    .nav-hamburger { order: 2; margin-left: auto; }
+    .nav-links     { order: 3; flex-basis: 100%; }
+}
+
+/* ---------- Tablet (601px - 900px) ---------- */
+@media (min-width: 601px) and (max-width: 900px) {
+    .nav-links a {
+        font-size: 0.88rem;
+        padding: 0.25rem 0.45rem;
+    }
+}

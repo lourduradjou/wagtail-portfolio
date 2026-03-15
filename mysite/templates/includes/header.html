@@ -4,15 +4,33 @@
     <a href="#main" class="skip-link">Skip to content</a>
     {% get_site_root as site_root %}
     <nav>
-        <p>
-        <a href="{% pageurl site_root %}">Home</a> |
-        {% for menuitem in site_root.get_children.live.in_menu %}
-            <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>{% if not forloop.last %} | {% endif %}
-        {% endfor %}
+        <!-- LEFT: Social icons -->
+        <div class="nav-icons">
+            <a href="https://github.com/lourduradjou" aria-label="GitHub" target="_blank" rel="noopener">
+                <span>{% include "icons/github.svg" %}</span>
+            </a>
+            <a href="https://linkedin.com/in/lourduradjou" aria-label="LinkedIn" target="_blank" rel="noopener">
+                <span>{% include "icons/linkedin.svg" %}</span>
+            </a>
+            <a href="https://mastodon.social/@lourdu" aria-label="Mastodon" target="_blank" rel="noopener">
+                <span>{% include "icons/mastodon.svg" %}</span>
+            </a>
+        </div>
 
-        | <a href="/search/">Search</a>
-        </p>
+        <!-- RIGHT: Nav links -->
+        <ul class="nav-links" id="nav-links">
+            <li><a href="{% pageurl site_root %}">Home</a></li>
+            {% for menuitem in site_root.get_children.live.in_menu %}
+                <li><a href="{% pageurl menuitem %}">{{ menuitem.title }}</a></li>
+            {% endfor %}
+            <li><a href="/search/">Search</a></li>
+        </ul>
+
+        <!-- Hamburger (mobile only) -->
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <svg class="icon-menu" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+            <svg class="icon-close" viewBox="0 0 24 24"><path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4z"/></svg>
+        </button>
     </nav>
-
-     {% wagtailuserbar "top-right" %}
+    {% wagtailuserbar "top-right" %}
 </header>
