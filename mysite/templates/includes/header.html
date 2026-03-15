@@ -1,5 +1,5 @@
 {% load wagtailcore_tags navigation_tags wagtailuserbar %}
-
+{% load i18n %}
 <header>
     <a href="#main" class="skip-link">Skip to content</a>
     {% get_site_root as site_root %}
@@ -31,6 +31,18 @@
             <svg class="icon-menu" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
             <svg class="icon-close" viewBox="0 0 24 24"><path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4z"/></svg>
         </button>
+
+        
+   <div class="lang-switcher">
+        {% get_available_languages as languages %}
+        {% for lang_code, lang_name in languages %}
+            <a href="/{{ lang_code }}/"
+            {% if lang_code == LANGUAGE_CODE %}class="active"{% endif %}>
+                {{ lang_code|upper }}
+            </a>
+            {% if not forloop.last %} | {% endif %}
+        {% endfor %}
+    </div>
     </nav>
     {% wagtailuserbar "top-right" %}
 </header>

@@ -142,12 +142,7 @@ USE_TZ = True
 
 WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
     ('en', "English"),
-    ('fr', "French"),
-    ('es', "Spanish"),
-    ('ta', "Tamil"),
     ('de', "German"),
-    ('hi', "Hindi"),
-    ('ar', "Arabic"),
 ]
 
 # Static files (CSS, JavaScript, Images)
