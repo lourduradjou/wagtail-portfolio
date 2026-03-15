@@ -32,6 +32,7 @@ def get_site_root(context):
                 locale__language_code=language
             ).first()
             if translated:
+                request.wagtail_locale = translated.locale
                 return translated
         except Exception:
             pass
