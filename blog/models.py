@@ -25,7 +25,7 @@ class BlogTagIndexPage(Page):
 
         # Filter by tag
         tag = request.GET.get('tag')
-        blogpages = BlogPage.objects.filter(tags__name=tag)
+        blogpages = BlogPage.objects.filter(tags__name=tag, locale=self.locale).live()
 
         # Update template context
         context = super().get_context(request)
@@ -37,7 +37,7 @@ class BlogIndexPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        blogpages = self.get_children().live().order_by('-first_published_at')
+        blogpages = self.get_children().live().order_by('-first_published_at').filter(locale=self.locale)
         context['blogpages'] = blogpages
         return context
 
