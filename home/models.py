@@ -5,7 +5,8 @@ from wagtail.fields import RichTextField
 
 # import MultiFieldPanel:
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-
+from wagtail.models import TranslatableMixin
+from wagtail.snippets.models import register_snippet
 
 class HomePage(Page):
     # add the Hero section of HomePage:
@@ -52,3 +53,7 @@ class HomePage(Page):
         ),
         FieldPanel('body'),
     ]
+
+@register_snippet
+class Advert(TranslatableMixin, models.Model):
+    name = models.CharField(max_length=255)
